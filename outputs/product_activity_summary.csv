@@ -1,0 +1,10 @@
+product_id,product_views,basket_additions,basket_removals,wishlist_events,purchase_events,refund_events
+prod_00001,1,1,0,0,0,0
+prod_00002,0,1,1,0,0,0
+prod_00003,0,0,1,1,0,0
+prod_00004,0,0,0,1,0,0
+prod_00005,1,0,0,0,0,0
+prod_00006,0,1,0,0,0,0
+prod_00007,0,0,1,0,0,0
+prod_00008,0,0,0,1,0,0
+prod_00009,1,0,0,0,0,0

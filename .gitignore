@@ -31,6 +31,12 @@ outputs/*
 !outputs/clean_events.jsonl
 !outputs/dead_letter_events.jsonl
 !outputs/stream_processing_summary.json
+!outputs/hourly_event_metrics.csv
+!outputs/customer_activity_summary.csv
+!outputs/product_activity_summary.csv
+!outputs/transaction_value_summary.csv
+!outputs/funnel_metrics.csv
+!outputs/analytics_summary.json
 !outputs/sample/
 !outputs/sample/.gitkeep
 

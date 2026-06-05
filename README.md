@@ -171,6 +171,26 @@ outputs/event_quality_summary.json
 
 This is a local validation workflow that maps conceptually to checks that could later run in Dataflow before writing to BigQuery-style analytical tables. No GCP resources are created.
 
+## Generate Analytics Outputs
+
+Milestone 6 adds local dashboard-ready aggregations over `outputs/clean_events.jsonl`. Run the local stream pipeline first if clean events need to be regenerated:
+
+```bash
+python scripts/run_local_stream.py
+python scripts/generate_reports.py
+```
+
+Analytics outputs are written to:
+
+- `outputs/hourly_event_metrics.csv`
+- `outputs/customer_activity_summary.csv`
+- `outputs/product_activity_summary.csv`
+- `outputs/transaction_value_summary.csv`
+- `outputs/funnel_metrics.csv`
+- `outputs/analytics_summary.json`
+
+These are local CSV and JSON artifacts that map conceptually to future BigQuery tables and dashboard sources. No BigQuery resources or dashboard UI are created in this milestone.
+
 ## Portfolio Positioning
 
 This repository is positioned as a production-style data engineering project scaffold. It emphasizes modular design, reliability patterns, analytical modeling boundaries, and cloud-aligned architecture without claiming live deployment. The aim is to make the design easy to review by data engineering, cloud engineering, and technical hiring audiences.
@@ -186,4 +206,4 @@ This repository is positioned as a production-style data engineering project sca
 
 ## Next Steps
 
-The recommended next milestone is to add BigQuery-style analytical models over the clean local output.
+The recommended next milestone is to add operational monitoring and reporting around the local pipeline outputs.

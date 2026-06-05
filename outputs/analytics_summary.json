@@ -1,0 +1,17 @@
+{
+  "clean_events_read": 48,
+  "customer_activity_rows": 8,
+  "funnel_metric_rows": 1,
+  "generated_at": "2026-06-05T08:44:59.769270Z",
+  "hourly_metric_rows": 1,
+  "outputs": {
+    "analytics_summary": "/Users/privilege/Desktop/GitHub_repository/gcp-realtime-data-engineering-platform/outputs/analytics_summary.json",
+    "customer_activity_summary": "/Users/privilege/Desktop/GitHub_repository/gcp-realtime-data-engineering-platform/outputs/customer_activity_summary.csv",
+    "funnel_metrics": "/Users/privilege/Desktop/GitHub_repository/gcp-realtime-data-engineering-platform/outputs/funnel_metrics.csv",
+    "hourly_event_metrics": "/Users/privilege/Desktop/GitHub_repository/gcp-realtime-data-engineering-platform/outputs/hourly_event_metrics.csv",
+    "product_activity_summary": "/Users/privilege/Desktop/GitHub_repository/gcp-realtime-data-engineering-platform/outputs/product_activity_summary.csv",
+    "transaction_value_summary": "/Users/privilege/Desktop/GitHub_repository/gcp-realtime-data-engineering-platform/outputs/transaction_value_summary.csv"
+  },
+  "product_activity_rows": 9,
+  "transaction_summary_rows": 1
+}
