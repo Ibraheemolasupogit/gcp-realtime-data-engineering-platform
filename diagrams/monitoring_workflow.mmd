@@ -1,5 +1,10 @@
 flowchart LR
-    A["Pipeline Metrics"] --> B["Local Monitoring Boundary"]
-    B --> C["Cloud Monitoring Mapping"]
-    B --> D["Quality Reports"]
-    B --> E["Operational Alerts Design"]
+    A["Stream Processing Summary"] --> D["Monitoring Collector"]
+    B["Quality Summary"] --> D
+    C["Analytics Summary"] --> D
+    E["Dead-Letter Review Summary"] --> D
+    D --> F["Operational Metrics"]
+    F --> G["Alert Rules"]
+    G --> H["pipeline_monitoring_summary.json"]
+    G --> I["pipeline_monitoring_report.md"]
+    H --> J["Optional Dashboard"]

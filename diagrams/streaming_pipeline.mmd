@@ -1,7 +1,12 @@
 flowchart LR
-    A["Inbound Events"] --> B["Parse"]
-    B --> C["Validate"]
-    C --> D["Deduplicate"]
-    D --> E["Handle Event Time"]
-    E --> F["Clean Output"]
-    C --> G["Dead-Letter Queue"]
+    A["Generated JSONL Events"] --> B["Publish to Local Queue"]
+    B --> C["Consume Messages"]
+    C --> D["Parse and Validate"]
+    D --> E{"Valid?"}
+    E -->|"yes"| F["Transform Clean Event"]
+    F --> G["Add Processing Metadata and Idempotency Key"]
+    G --> H["Write Clean Events"]
+    E -->|"no"| I["Build Dead-Letter Record"]
+    I --> J["Write Dead-Letter Events"]
+    H --> K["Analytics and Reports"]
+    J --> L["Replay Candidate Review"]
