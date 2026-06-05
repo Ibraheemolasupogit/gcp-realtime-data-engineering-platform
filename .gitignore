@@ -43,6 +43,7 @@ outputs/*
 !outputs/sample/.gitkeep
 !reports/pipeline_monitoring_report.md
 !reports/dead_letter_review_report.md
+!reports/analytics_summary.md
 
 # Secrets and credentials
 .env

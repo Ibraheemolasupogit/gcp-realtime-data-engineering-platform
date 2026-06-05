@@ -254,6 +254,32 @@ Key files:
 
 These files show how the local pipeline maps conceptually to Pub/Sub, Dataflow, BigQuery, Cloud Storage, Cloud Logging, and Cloud Monitoring. They do not launch Dataflow, connect to GCP, require credentials, or provision resources.
 
+## Generate Reporting And Optional Dashboard
+
+Milestone 11 adds a local analytics summary report and optional Streamlit dashboard over generated outputs.
+
+Refresh local outputs:
+
+```bash
+python scripts/run_local_stream.py
+python scripts/generate_reports.py
+python scripts/run_dead_letter_review.py
+```
+
+The analytics summary report is written to:
+
+```text
+reports/analytics_summary.md
+```
+
+Run the optional dashboard if Streamlit is installed:
+
+```bash
+python -m streamlit run dashboard/streamlit_app.py
+```
+
+Streamlit is not required for CI. The dashboard is local-only and does not connect to Looker Studio, BigQuery, or GCP services.
+
 ## Portfolio Positioning
 
 This repository is positioned as a production-style data engineering project scaffold. It emphasizes modular design, reliability patterns, analytical modeling boundaries, and cloud-aligned architecture without claiming live deployment. The aim is to make the design easy to review by data engineering, cloud engineering, and technical hiring audiences.

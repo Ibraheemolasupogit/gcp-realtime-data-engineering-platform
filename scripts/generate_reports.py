@@ -35,6 +35,11 @@ def build_arg_parser() -> argparse.ArgumentParser:
         action="store_true",
         help="Generate only pipeline monitoring outputs from existing artifacts.",
     )
+    parser.add_argument(
+        "--skip-analytics-report",
+        action="store_true",
+        help="Skip Markdown analytics summary report generation.",
+    )
     return parser
 
 
@@ -48,6 +53,10 @@ def main(argv: list[str] | None = None) -> None:
     """Generate local analytics and monitoring outputs from local artifacts."""
     from realtime_data_platform.analytics import run_analytics
     from realtime_data_platform.monitoring import run_monitoring
+    from realtime_data_platform.reporting import (
+        build_report_context,
+        write_analytics_summary_report,
+    )
 
     args = build_arg_parser().parse_args(argv)
     if not args.monitoring_only:
@@ -74,6 +83,12 @@ def main(argv: list[str] | None = None) -> None:
             f"summary={PROJECT_ROOT / 'outputs/pipeline_monitoring_summary.json'} "
             f"report={PROJECT_ROOT / 'reports/pipeline_monitoring_report.md'}"
         )
+
+    if not args.skip_analytics_report:
+        context = build_report_context(PROJECT_ROOT)
+        report_path = PROJECT_ROOT / "reports/analytics_summary.md"
+        write_analytics_summary_report(context, report_path)
+        print(f"Local analytics summary report complete: report={report_path}")
 
 
 if __name__ == "__main__":

@@ -96,7 +96,7 @@
     "total_events_processed": 64,
     "valid_events": 48
   },
-  "monitoring_generated_at": "2026-06-05T09:10:28.722334Z",
+  "monitoring_generated_at": "2026-06-05T09:52:07.773611Z",
   "pipeline_status": "failed",
   "source_outputs_checked": {
     "analytics_outputs": [

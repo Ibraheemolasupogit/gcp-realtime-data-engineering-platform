@@ -2,7 +2,7 @@
   "clean_events_read": 48,
   "customer_activity_rows": 8,
   "funnel_metric_rows": 1,
-  "generated_at": "2026-06-05T08:44:59.769270Z",
+  "generated_at": "2026-06-05T09:52:07.772937Z",
   "hourly_metric_rows": 1,
   "outputs": {
     "analytics_summary": "/Users/privilege/Desktop/GitHub_repository/gcp-realtime-data-engineering-platform/outputs/analytics_summary.json",

@@ -3,7 +3,7 @@
 ## Executive Summary
 
 Local pipeline status is **failed**.
-Monitoring was generated at `2026-06-05T09:10:28.722334Z` from local output
+Monitoring was generated at `2026-06-05T09:52:07.773611Z` from local output
 artifacts only.
 
 ## Pipeline Status
