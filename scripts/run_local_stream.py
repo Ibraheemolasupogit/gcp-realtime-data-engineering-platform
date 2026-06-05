@@ -1,4 +1,4 @@
-"""Run a local Pub/Sub-style publish and consume simulation."""
+"""Run the local Pub/Sub-style stream processing pipeline."""
 
 import argparse
 import logging
@@ -19,9 +19,9 @@ DEFAULT_INPUT_FILES = (
 
 
 def build_arg_parser() -> argparse.ArgumentParser:
-    """Build CLI arguments for the local queue simulation."""
+    """Build CLI arguments for the local stream processing pipeline."""
     parser = argparse.ArgumentParser(
-        description="Run a local Pub/Sub-style publisher and consumer simulation."
+        description="Run the local Pub/Sub-style stream processing pipeline."
     )
     parser.add_argument(
         "--input",
@@ -43,7 +43,18 @@ def build_arg_parser() -> argparse.ArgumentParser:
     parser.add_argument(
         "--max-events",
         type=int,
-        help="Maximum number of queued messages to consume.",
+        help="Deprecated. Processing currently consumes all queued messages.",
+    )
+    parser.add_argument(
+        "--output-dir",
+        default="outputs",
+        help="Directory for clean, dead-letter, and summary outputs.",
+    )
+    parser.add_argument(
+        "--allowed-lateness-seconds",
+        type=int,
+        default=300,
+        help="Allowed difference between ingestion_timestamp and event_timestamp.",
     )
     parser.add_argument(
         "--verbose",
@@ -62,9 +73,8 @@ def resolve_input_files(paths: list[str] | None) -> list[Path]:
 
 
 def main(argv: list[str] | None = None) -> None:
-    """Publish sample JSONL events into a local queue and consume them."""
-    from realtime_data_platform.consumer import LocalEventConsumer
-    from realtime_data_platform.publisher import InMemoryEventQueue, LocalEventPublisher
+    """Run local publish, consume, validate, transform, and route flow."""
+    from realtime_data_platform.processing import run_local_processing_pipeline
 
     args = build_arg_parser().parse_args(argv)
     logging.basicConfig(
@@ -72,22 +82,23 @@ def main(argv: list[str] | None = None) -> None:
         format="%(levelname)s %(name)s - %(message)s",
     )
 
-    queue = InMemoryEventQueue(topic_name="local-retail-events")
-    publisher = LocalEventPublisher(queue, event_rate_per_second=args.event_rate)
-    consumer = LocalEventConsumer(queue)
-
-    input_files = resolve_input_files(args.inputs)
-    published_messages = publisher.publish_jsonl_files(input_files)
-    if args.replay:
-        published_messages.extend(publisher.publish_jsonl_files(input_files, replay=True))
-
-    consumed_messages = consumer.consume_batch(max_messages=args.max_events)
-
+    result = run_local_processing_pipeline(
+        input_files=resolve_input_files(args.inputs),
+        output_dir=PROJECT_ROOT / args.output_dir,
+        event_rate_per_second=args.event_rate,
+        replay=args.replay,
+        allowed_lateness_seconds=args.allowed_lateness_seconds,
+        project_root=PROJECT_ROOT,
+    )
+    summary = result["summary"]
     print(
-        "Local Pub/Sub-style simulation complete: "
-        f"published={len(published_messages)} "
-        f"consumed={len(consumed_messages)} "
-        f"remaining={queue.size()}"
+        "Local stream processing complete: "
+        f"processed={summary['total_events_processed']} "
+        f"clean={summary['clean_events_written']} "
+        f"dead_letter={summary['dead_letter_events_written']} "
+        f"duplicates={summary['duplicate_events']} "
+        f"late={summary['late_events']} "
+        f"output_dir={PROJECT_ROOT / args.output_dir}"
     )
 
 

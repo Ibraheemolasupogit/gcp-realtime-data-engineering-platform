@@ -1,0 +1,10 @@
+{
+  "clean_events_written": 48,
+  "dead_letter_events_written": 16,
+  "duplicate_events": 4,
+  "late_events": 8,
+  "processing_completed_at": "2026-06-05T08:17:59.102895Z",
+  "processing_errors": 0,
+  "processing_started_at": "2026-06-05T08:17:59.102115Z",
+  "total_events_processed": 64
+}

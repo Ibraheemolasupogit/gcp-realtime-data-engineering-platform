@@ -130,25 +130,30 @@ Generation settings live in `configs/event_generation.yaml`, and can be overridd
 python scripts/generate_demo_events.py --seed 7 --events-per-category 20
 ```
 
-## Run Local Pub/Sub-Style Simulation
+## Run Local Stream Processing
 
-Milestone 3 adds a local publisher, in-memory queue, and consumer that simulate event movement through a Pub/Sub-style topic and subscription boundary. This is a local simulation only: no Pub/Sub topics, subscriptions, service accounts, or GCP resources are created.
+Milestones 3 and 5 add a local publisher, in-memory queue, consumer, validator, transformer, and router that simulate event movement through a Pub/Sub-style topic and local processing boundary. This is a local simulation only: no Pub/Sub topics, subscriptions, service accounts, Dataflow jobs, BigQuery datasets, or GCP resources are created.
 
 ```bash
 python scripts/run_local_stream.py
 ```
 
-The command reads the sample JSONL files under `data/sample/`, publishes them to an in-memory queue, and consumes queued messages locally.
+The command reads the sample JSONL files under `data/sample/`, publishes them to an in-memory queue, consumes queued messages locally, validates events, and writes:
+
+- `outputs/clean_events.jsonl`
+- `outputs/dead_letter_events.jsonl`
+- `outputs/stream_processing_summary.json`
 
 Useful options:
 
 ```bash
 python scripts/run_local_stream.py --event-rate 10
 python scripts/run_local_stream.py --replay
-python scripts/run_local_stream.py --input data/sample/customer_events.jsonl --max-events 5
+python scripts/run_local_stream.py --input data/sample/customer_events.jsonl
+python scripts/run_local_stream.py --allowed-lateness-seconds 900
 ```
 
-Conceptually, `LocalEventPublisher` maps to a Pub/Sub publisher, `InMemoryEventQueue` maps to a topic boundary, and `LocalEventConsumer` maps to a subscription consumer. These are Python-local abstractions for development and tests only.
+Conceptually, `LocalEventPublisher` maps to a Pub/Sub publisher, `InMemoryEventQueue` maps to a topic boundary, `LocalEventConsumer` maps to a subscription consumer, and `LocalStreamProcessor` maps to a future Dataflow / Apache Beam processing stage. These are Python-local abstractions for development and tests only.
 
 ## Run Data Quality Checks
 
@@ -181,4 +186,4 @@ This repository is positioned as a production-style data engineering project sca
 
 ## Next Steps
 
-The recommended next milestone is to integrate validation into a local stream processing prototype with clean-event output and dead-letter routing.
+The recommended next milestone is to add BigQuery-style analytical models over the clean local output.

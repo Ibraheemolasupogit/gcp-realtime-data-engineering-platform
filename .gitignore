@@ -28,6 +28,9 @@ outputs/*
 !reports/sample/.gitkeep
 !outputs/.gitkeep
 !outputs/event_quality_summary.json
+!outputs/clean_events.jsonl
+!outputs/dead_letter_events.jsonl
+!outputs/stream_processing_summary.json
 !outputs/sample/
 !outputs/sample/.gitkeep
 
