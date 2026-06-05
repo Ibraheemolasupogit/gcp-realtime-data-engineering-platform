@@ -1,11 +1,35 @@
-# Placeholder quality rules for future validation implementation.
 quality_rules:
   schema_validation: true
+  required_fields:
+    - event_id
+    - event_type
+    - event_timestamp
+    - ingestion_timestamp
+    - event_source
+    - customer_id
+    - session_id
+    - event_version
   duplicate_detection:
     key: event_id
   event_time:
     allow_late_events: true
     max_lateness_seconds: 300
+  identifier_patterns:
+    customer_id: "^cust_\\d{5}$"
+    product_id: "^prod_\\d{5}$"
+    session_id: "^sess_\\d{5}$"
+  transaction_amount:
+    allow_negative: false
   dead_letter:
     enabled: true
     route_invalid_events: true
+  scoring:
+    starting_score: 100
+    penalties:
+      missing_required_field: 10
+      invalid_timestamp: 8
+      duplicate_event_id: 5
+      late_event: 3
+      unknown_event_type: 8
+      invalid_transaction_amount: 10
+      malformed_id: 8

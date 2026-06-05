@@ -150,6 +150,22 @@ python scripts/run_local_stream.py --input data/sample/customer_events.jsonl --m
 
 Conceptually, `LocalEventPublisher` maps to a Pub/Sub publisher, `InMemoryEventQueue` maps to a topic boundary, and `LocalEventConsumer` maps to a subscription consumer. These are Python-local abstractions for development and tests only.
 
+## Run Data Quality Checks
+
+Milestone 4 adds local event schema validation and data quality scoring. The validation layer checks required fields, data types, timestamps, event types, identifiers, duplicate event IDs, late events, and transaction amount rules.
+
+```bash
+python scripts/run_quality_checks.py
+```
+
+By default this validates the sample JSONL files and writes:
+
+```text
+outputs/event_quality_summary.json
+```
+
+This is a local validation workflow that maps conceptually to checks that could later run in Dataflow before writing to BigQuery-style analytical tables. No GCP resources are created.
+
 ## Portfolio Positioning
 
 This repository is positioned as a production-style data engineering project scaffold. It emphasizes modular design, reliability patterns, analytical modeling boundaries, and cloud-aligned architecture without claiming live deployment. The aim is to make the design easy to review by data engineering, cloud engineering, and technical hiring audiences.
@@ -165,4 +181,4 @@ This repository is positioned as a production-style data engineering project sca
 
 ## Next Steps
 
-The recommended next milestone is to implement the local stream processing prototype for validation, duplicate detection, late-event handling, and dead-letter routing.
+The recommended next milestone is to integrate validation into a local stream processing prototype with clean-event output and dead-letter routing.

@@ -27,6 +27,7 @@ outputs/*
 !reports/sample/
 !reports/sample/.gitkeep
 !outputs/.gitkeep
+!outputs/event_quality_summary.json
 !outputs/sample/
 !outputs/sample/.gitkeep
 

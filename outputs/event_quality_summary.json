@@ -1,0 +1,106 @@
+{
+  "average_quality_score": 98.22,
+  "duplicate_events": 4,
+  "error_counts_by_rule": {
+    "duplicate_event_id": 4,
+    "invalid_timestamp": 1,
+    "invalid_transaction_amount": 1,
+    "late_event": 8,
+    "malformed_customer_id": 1,
+    "malformed_product_id": 1,
+    "missing_required_field": 2,
+    "unknown_event_type": 2
+  },
+  "generated_at": "2026-06-05T07:13:24.006108Z",
+  "invalid_event_examples": [
+    {
+      "errors": [
+        {
+          "field": "event_timestamp",
+          "message": "Event timestamp exceeds configured allowed lateness.",
+          "rule": "late_event",
+          "severity": "warning",
+          "value": 600
+        },
+        {
+          "field": "event_id",
+          "message": "Duplicate event_id detected in validation run.",
+          "rule": "duplicate_event_id",
+          "severity": "error",
+          "value": "68daaa6a-1db3-50e1-a7f4-43d0f2589e6c"
+        }
+      ],
+      "event_id": "68daaa6a-1db3-50e1-a7f4-43d0f2589e6c",
+      "event_type": "customer_registered",
+      "quality_score": 92
+    },
+    {
+      "errors": [
+        {
+          "field": "event_timestamp",
+          "message": "Event timestamp exceeds configured allowed lateness.",
+          "rule": "late_event",
+          "severity": "warning",
+          "value": 11100
+        }
+      ],
+      "event_id": "f7160cb1-f22e-52bc-971e-15e66ddf8720",
+      "event_type": "customer_registered",
+      "quality_score": 97
+    },
+    {
+      "errors": [
+        {
+          "field": "customer_id",
+          "message": "Missing required field: customer_id.",
+          "rule": "missing_required_field",
+          "severity": "error",
+          "value": null
+        }
+      ],
+      "event_id": "4018878d-26e0-5078-a4fe-31e93ce19d74",
+      "event_type": "customer_logged_in",
+      "quality_score": 90
+    },
+    {
+      "errors": [
+        {
+          "field": "customer_id",
+          "message": "customer_id must match cust_00000 format.",
+          "rule": "malformed_customer_id",
+          "severity": "error",
+          "value": "customer without stable id"
+        }
+      ],
+      "event_id": "9f952bed-0d92-5fc9-af24-e1ad4a73191f",
+      "event_type": "customer_profile_updated",
+      "quality_score": 92
+    },
+    {
+      "errors": [
+        {
+          "field": "event_timestamp",
+          "message": "Event timestamp exceeds configured allowed lateness.",
+          "rule": "late_event",
+          "severity": "warning",
+          "value": 600
+        },
+        {
+          "field": "event_id",
+          "message": "Duplicate event_id detected in validation run.",
+          "rule": "duplicate_event_id",
+          "severity": "error",
+          "value": "9ba0c416-454d-5919-8515-3e8f16f9e2ba"
+        }
+      ],
+      "event_id": "9ba0c416-454d-5919-8515-3e8f16f9e2ba",
+      "event_type": "product_viewed",
+      "quality_score": 92
+    }
+  ],
+  "invalid_events": 16,
+  "malformed_events": 2,
+  "quality_band": "Excellent",
+  "total_events_checked": 64,
+  "valid_events": 48
+}
