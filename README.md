@@ -236,6 +236,24 @@ This reads `outputs/dead_letter_events.jsonl` and writes:
 
 The workflow classifies replayable and non-replayable records, summarizes rejection reasons, documents retry policy metadata, and explains idempotency safeguards. It does not republish events, connect to Pub/Sub, run Dataflow, write BigQuery, or provision GCP resources.
 
+## Review Beam/Dataflow Reference
+
+Milestone 10 adds an import-safe Apache Beam / Dataflow reference skeleton and architecture notes:
+
+```bash
+python pipelines/apache_beam_pipeline.py --describe
+```
+
+Key files:
+
+- `pipelines/apache_beam_pipeline.py`
+- `pipelines/dataflow_pipeline_design.md`
+- `docs/gcp_reference_architecture.md`
+- `docs/distributed_systems_design.md`
+- `diagrams/dataflow_reference_architecture.mmd`
+
+These files show how the local pipeline maps conceptually to Pub/Sub, Dataflow, BigQuery, Cloud Storage, Cloud Logging, and Cloud Monitoring. They do not launch Dataflow, connect to GCP, require credentials, or provision resources.
+
 ## Portfolio Positioning
 
 This repository is positioned as a production-style data engineering project scaffold. It emphasizes modular design, reliability patterns, analytical modeling boundaries, and cloud-aligned architecture without claiming live deployment. The aim is to make the design easy to review by data engineering, cloud engineering, and technical hiring audiences.
