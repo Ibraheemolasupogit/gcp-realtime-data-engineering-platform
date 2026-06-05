@@ -37,8 +37,10 @@ outputs/*
 !outputs/transaction_value_summary.csv
 !outputs/funnel_metrics.csv
 !outputs/analytics_summary.json
+!outputs/pipeline_monitoring_summary.json
 !outputs/sample/
 !outputs/sample/.gitkeep
+!reports/pipeline_monitoring_report.md
 
 # Secrets and credentials
 .env

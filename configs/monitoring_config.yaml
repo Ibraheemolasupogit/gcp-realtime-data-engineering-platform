@@ -1,12 +1,33 @@
-# Placeholder operational monitoring configuration.
 monitoring:
   metrics:
-    - events_received
-    - events_validated
+    - total_events_processed
+    - clean_events_written
+    - dead_letter_events_written
+    - valid_events
+    - invalid_events
     - duplicate_events
     - late_events
-    - dead_letter_events
     - processing_errors
+    - error_rate
+    - dead_letter_rate
+    - duplicate_rate
+    - late_event_rate
+    - average_quality_score
+  thresholds:
+    max_dead_letter_rate: 0.20
+    max_duplicate_rate: 0.10
+    max_late_event_rate: 0.15
+    min_average_quality_score: 90
+    max_processing_errors: 0
+  required_outputs:
+    clean_events: outputs/clean_events.jsonl
+    dead_letter_events: outputs/dead_letter_events.jsonl
+    analytics:
+      - outputs/hourly_event_metrics.csv
+      - outputs/customer_activity_summary.csv
+      - outputs/product_activity_summary.csv
+      - outputs/transaction_value_summary.csv
+      - outputs/funnel_metrics.csv
   gcp_alignment:
     logging_service: cloud_logging
     monitoring_service: cloud_monitoring

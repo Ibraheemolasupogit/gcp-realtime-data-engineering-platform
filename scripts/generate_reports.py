@@ -11,7 +11,7 @@ if str(SRC_DIR) not in sys.path:
 
 
 def build_arg_parser() -> argparse.ArgumentParser:
-    """Build CLI arguments for local analytics generation."""
+    """Build CLI arguments for local analytics and monitoring generation."""
     parser = argparse.ArgumentParser(
         description="Generate local dashboard-ready analytics CSV outputs."
     )
@@ -25,6 +25,16 @@ def build_arg_parser() -> argparse.ArgumentParser:
         default="outputs",
         help="Directory for analytics CSV and summary outputs.",
     )
+    parser.add_argument(
+        "--skip-monitoring",
+        action="store_true",
+        help="Generate analytics outputs without monitoring summary/report outputs.",
+    )
+    parser.add_argument(
+        "--monitoring-only",
+        action="store_true",
+        help="Generate only pipeline monitoring outputs from existing artifacts.",
+    )
     return parser
 
 
@@ -35,22 +45,35 @@ def resolve_path(path: str) -> Path:
 
 
 def main(argv: list[str] | None = None) -> None:
-    """Generate local analytics outputs from clean stream events."""
+    """Generate local analytics and monitoring outputs from local artifacts."""
     from realtime_data_platform.analytics import run_analytics
+    from realtime_data_platform.monitoring import run_monitoring
 
     args = build_arg_parser().parse_args(argv)
-    summary = run_analytics(
-        clean_events_path=resolve_path(args.clean_events),
-        output_dir=resolve_path(args.output_dir),
-    )
-    print(
-        "Local analytics generation complete: "
-        f"clean_events={summary['clean_events_read']} "
-        f"hourly_rows={summary['hourly_metric_rows']} "
-        f"customer_rows={summary['customer_activity_rows']} "
-        f"product_rows={summary['product_activity_rows']} "
-        f"output_dir={resolve_path(args.output_dir)}"
-    )
+    if not args.monitoring_only:
+        summary = run_analytics(
+            clean_events_path=resolve_path(args.clean_events),
+            output_dir=resolve_path(args.output_dir),
+        )
+        print(
+            "Local analytics generation complete: "
+            f"clean_events={summary['clean_events_read']} "
+            f"hourly_rows={summary['hourly_metric_rows']} "
+            f"customer_rows={summary['customer_activity_rows']} "
+            f"product_rows={summary['product_activity_rows']} "
+            f"output_dir={resolve_path(args.output_dir)}"
+        )
+
+    if args.monitoring_only or not args.skip_monitoring:
+        monitoring_summary = run_monitoring(project_root=PROJECT_ROOT)
+        print(
+            "Local monitoring generation complete: "
+            f"status={monitoring_summary['pipeline_status']} "
+            f"critical_alerts={monitoring_summary['alert_counts_by_severity']['critical']} "
+            f"warning_alerts={monitoring_summary['alert_counts_by_severity']['warning']} "
+            f"summary={PROJECT_ROOT / 'outputs/pipeline_monitoring_summary.json'} "
+            f"report={PROJECT_ROOT / 'reports/pipeline_monitoring_report.md'}"
+        )
 
 
 if __name__ == "__main__":

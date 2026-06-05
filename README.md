@@ -206,6 +206,21 @@ Milestone 7 adds a local SQL design layer under `sql/` for warehouse-ready schem
 
 These SQL files use BigQuery Standard SQL and document partitioning and clustering recommendations where relevant. They are portfolio-quality design artifacts only; the repository does not connect to BigQuery, run queries, create datasets, or provision cloud resources.
 
+## Generate Monitoring Report
+
+Milestone 8 adds local operational monitoring over existing pipeline outputs:
+
+```bash
+python scripts/generate_reports.py --monitoring-only
+```
+
+This writes:
+
+- `outputs/pipeline_monitoring_summary.json`
+- `reports/pipeline_monitoring_report.md`
+
+Running `python scripts/generate_reports.py` also refreshes analytics outputs and then generates monitoring outputs. Monitoring is local-only and maps conceptually to Cloud Logging and Cloud Monitoring; no live GCP monitoring resources are provisioned.
+
 ## Portfolio Positioning
 
 This repository is positioned as a production-style data engineering project scaffold. It emphasizes modular design, reliability patterns, analytical modeling boundaries, and cloud-aligned architecture without claiming live deployment. The aim is to make the design easy to review by data engineering, cloud engineering, and technical hiring audiences.

@@ -1,0 +1,115 @@
+{
+  "alert_counts_by_severity": {
+    "critical": 1,
+    "info": 0,
+    "warning": 0
+  },
+  "alerts": [
+    {
+      "alert_name": "dead_letter_rate_high",
+      "message": "Dead-letter rate is above the configured threshold.",
+      "metric_name": "dead_letter_rate",
+      "observed_value": 0.25,
+      "recommended_action": "Inspect dead-letter records and validation rules before replay.",
+      "severity": "critical",
+      "status": "triggered",
+      "threshold": 0.2
+    },
+    {
+      "alert_name": "duplicate_rate_high",
+      "message": "Duplicate event rate is above the configured threshold.",
+      "metric_name": "duplicate_rate",
+      "observed_value": 0.0625,
+      "recommended_action": "Review idempotency keys and replay behavior.",
+      "severity": "warning",
+      "status": "ok",
+      "threshold": 0.1
+    },
+    {
+      "alert_name": "late_event_rate_high",
+      "message": "Late-event rate is above the configured threshold.",
+      "metric_name": "late_event_rate",
+      "observed_value": 0.125,
+      "recommended_action": "Review event-time lag and future watermark strategy.",
+      "severity": "warning",
+      "status": "ok",
+      "threshold": 0.15
+    },
+    {
+      "alert_name": "quality_score_low",
+      "message": "Average data quality score is below the configured threshold.",
+      "metric_name": "average_quality_score",
+      "observed_value": 98.22,
+      "recommended_action": "Inspect validation error counts and upstream event contracts.",
+      "severity": "warning",
+      "status": "ok",
+      "threshold": 90
+    },
+    {
+      "alert_name": "clean_event_output_missing",
+      "message": "Clean event output is missing.",
+      "metric_name": "clean_event_output_exists",
+      "observed_value": true,
+      "recommended_action": "Run the local stream processing pipeline before analytics or monitoring.",
+      "severity": "critical",
+      "status": "ok",
+      "threshold": true
+    },
+    {
+      "alert_name": "analytics_output_missing",
+      "message": "One or more analytics outputs are missing.",
+      "metric_name": "analytics_outputs_exist",
+      "observed_value": true,
+      "recommended_action": "Run local analytics generation to refresh dashboard-ready CSVs.",
+      "severity": "warning",
+      "status": "ok",
+      "threshold": true
+    },
+    {
+      "alert_name": "processing_errors_present",
+      "message": "Processing errors are present in the latest run.",
+      "metric_name": "processing_errors",
+      "observed_value": 0,
+      "recommended_action": "Inspect processor logs and dead-letter processing_error records.",
+      "severity": "critical",
+      "status": "ok",
+      "threshold": 0
+    }
+  ],
+  "metrics": {
+    "analytics_clean_events_read": 48,
+    "analytics_outputs_exist": true,
+    "average_quality_score": 98.22,
+    "clean_event_output_exists": true,
+    "clean_events_written": 48,
+    "dead_letter_events_written": 16,
+    "dead_letter_output_exists": true,
+    "dead_letter_rate": 0.25,
+    "duplicate_events": 4,
+    "duplicate_rate": 0.0625,
+    "error_rate": 0.0,
+    "invalid_events": 16,
+    "late_event_rate": 0.125,
+    "late_events": 8,
+    "processing_errors": 0,
+    "quality_band": "Excellent",
+    "total_events_processed": 64,
+    "valid_events": 48
+  },
+  "monitoring_generated_at": "2026-06-05T09:10:28.722334Z",
+  "pipeline_status": "failed",
+  "source_outputs_checked": {
+    "analytics_outputs": [
+      "/Users/privilege/Desktop/GitHub_repository/gcp-realtime-data-engineering-platform/outputs/hourly_event_metrics.csv",
+      "/Users/privilege/Desktop/GitHub_repository/gcp-realtime-data-engineering-platform/outputs/customer_activity_summary.csv",
+      "/Users/privilege/Desktop/GitHub_repository/gcp-realtime-data-engineering-platform/outputs/product_activity_summary.csv",
+      "/Users/privilege/Desktop/GitHub_repository/gcp-realtime-data-engineering-platform/outputs/transaction_value_summary.csv",
+      "/Users/privilege/Desktop/GitHub_repository/gcp-realtime-data-engineering-platform/outputs/funnel_metrics.csv"
+    ],
+    "analytics_summary": "/Users/privilege/Desktop/GitHub_repository/gcp-realtime-data-engineering-platform/outputs/analytics_summary.json",
+    "clean_events": "/Users/privilege/Desktop/GitHub_repository/gcp-realtime-data-engineering-platform/outputs/clean_events.jsonl",
+    "dead_letter_events": "/Users/privilege/Desktop/GitHub_repository/gcp-realtime-data-engineering-platform/outputs/dead_letter_events.jsonl",
+    "event_quality_summary": "/Users/privilege/Desktop/GitHub_repository/gcp-realtime-data-engineering-platform/outputs/event_quality_summary.json",
+    "stream_processing_summary": "/Users/privilege/Desktop/GitHub_repository/gcp-realtime-data-engineering-platform/outputs/stream_processing_summary.json"
+  }
+}
