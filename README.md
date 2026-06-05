@@ -2,13 +2,13 @@
 
 A local-first, GCP-aligned real-time data engineering platform scaffold for retail and customer event analytics.
 
-This repository is designed to show how a production-style streaming analytics platform can be structured before cloud resources or streaming logic are introduced. The project maps local modules and design documents to common GCP services such as Pub/Sub, Dataflow, BigQuery, Cloud Logging, and Cloud Monitoring, while keeping Milestone 1 focused on repository setup, documentation, quality gates, and a maintainable project layout.
+This repository is designed to show how a production-style streaming analytics platform can be structured before cloud resources are introduced. The project maps local modules and design documents to common GCP services such as Pub/Sub, Dataflow, BigQuery, Cloud Logging, and Cloud Monitoring, while staying local-first and testable.
 
 ## Problem Statement
 
 Retail and customer analytics workloads often need to ingest high-volume behavioral events, validate event quality, process events with low latency, handle late or duplicate records, and publish dashboard-ready analytical outputs. Building this reliably requires more than a single script: it needs clear boundaries between ingestion, messaging, stream processing, quality validation, analytical modeling, replay handling, observability, and reporting.
 
-This project will evolve toward that architecture incrementally. At this milestone, it establishes the professional scaffold only.
+This project evolves toward that architecture incrementally. Current milestones establish the scaffold, deterministic sample events, and a local Pub/Sub-style publisher and consumer simulation.
 
 ## Architecture Summary
 
@@ -39,7 +39,7 @@ Additional Mermaid placeholders are available under `diagrams/`.
 
 ## Local-First Implementation Note
 
-Milestone 1 does not provision cloud infrastructure, open GCP connections, or implement streaming behavior. The repository is intentionally local-first so that development, testing, and review can happen without credentials or live cloud dependencies.
+The current implementation does not provision cloud infrastructure, open GCP connections, or run a managed streaming service. The repository is intentionally local-first so that development, testing, and review can happen without credentials or live cloud dependencies.
 
 Future milestones can map local interfaces to managed GCP services while preserving testable module boundaries.
 
@@ -130,14 +130,34 @@ Generation settings live in `configs/event_generation.yaml`, and can be overridd
 python scripts/generate_demo_events.py --seed 7 --events-per-category 20
 ```
 
+## Run Local Pub/Sub-Style Simulation
+
+Milestone 3 adds a local publisher, in-memory queue, and consumer that simulate event movement through a Pub/Sub-style topic and subscription boundary. This is a local simulation only: no Pub/Sub topics, subscriptions, service accounts, or GCP resources are created.
+
+```bash
+python scripts/run_local_stream.py
+```
+
+The command reads the sample JSONL files under `data/sample/`, publishes them to an in-memory queue, and consumes queued messages locally.
+
+Useful options:
+
+```bash
+python scripts/run_local_stream.py --event-rate 10
+python scripts/run_local_stream.py --replay
+python scripts/run_local_stream.py --input data/sample/customer_events.jsonl --max-events 5
+```
+
+Conceptually, `LocalEventPublisher` maps to a Pub/Sub publisher, `InMemoryEventQueue` maps to a topic boundary, and `LocalEventConsumer` maps to a subscription consumer. These are Python-local abstractions for development and tests only.
+
 ## Portfolio Positioning
 
 This repository is positioned as a production-style data engineering project scaffold. It emphasizes modular design, reliability patterns, analytical modeling boundaries, and cloud-aligned architecture without claiming live deployment. The aim is to make the design easy to review by data engineering, cloud engineering, and technical hiring audiences.
 
 ## Limitations
 
-- No streaming logic is implemented yet.
-- No synthetic event generation is implemented yet.
+- No full streaming processor is implemented yet.
+- No managed streaming service is implemented.
 - No GCP resources are provisioned.
 - No credentials, service accounts, or cloud deployment scripts are included.
 - No benchmarking or performance claims are included.
@@ -145,4 +165,4 @@ This repository is positioned as a production-style data engineering project sca
 
 ## Next Steps
 
-The recommended next milestone is to define the synthetic retail event model and local sample event generation. That will give the platform a concrete event contract while still keeping the project local-first and testable.
+The recommended next milestone is to implement the local stream processing prototype for validation, duplicate detection, late-event handling, and dead-letter routing.
