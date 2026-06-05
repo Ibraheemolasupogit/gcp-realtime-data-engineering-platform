@@ -109,6 +109,27 @@ ruff check .
 pytest
 ```
 
+## Generate Sample Events
+
+Milestone 2 adds deterministic local JSONL event generation for customer, product, transaction, and session events. The generated files are intentionally small and include normal records plus selected data quality edge cases for later validation and processing milestones.
+
+```bash
+python scripts/generate_demo_events.py
+```
+
+By default this writes:
+
+- `data/sample/customer_events.jsonl`
+- `data/sample/product_events.jsonl`
+- `data/sample/transaction_events.jsonl`
+- `data/sample/session_events.jsonl`
+
+Generation settings live in `configs/event_generation.yaml`, and can be overridden locally:
+
+```bash
+python scripts/generate_demo_events.py --seed 7 --events-per-category 20
+```
+
 ## Portfolio Positioning
 
 This repository is positioned as a production-style data engineering project scaffold. It emphasizes modular design, reliability patterns, analytical modeling boundaries, and cloud-aligned architecture without claiming live deployment. The aim is to make the design easy to review by data engineering, cloud engineering, and technical hiring audiences.

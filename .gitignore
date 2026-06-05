@@ -22,6 +22,7 @@ outputs/*
 !data/raw/.gitkeep
 !data/processed/.gitkeep
 !data/sample/.gitkeep
+!data/sample/*.jsonl
 !reports/.gitkeep
 !reports/sample/
 !reports/sample/.gitkeep

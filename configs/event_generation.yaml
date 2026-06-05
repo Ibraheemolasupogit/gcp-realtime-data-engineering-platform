@@ -1,0 +1,18 @@
+# Local-first synthetic event generation settings.
+event_generation:
+  seed: 42
+  events_per_category: 12
+  output_dir: data/sample
+  base_timestamp: "2026-01-15T12:00:00Z"
+  event_version: "1.0"
+  include_edge_cases: true
+  late_event_lag_minutes: 180
+  categories:
+    customer:
+      output_file: customer_events.jsonl
+    product:
+      output_file: product_events.jsonl
+    transaction:
+      output_file: transaction_events.jsonl
+    session:
+      output_file: session_events.jsonl
