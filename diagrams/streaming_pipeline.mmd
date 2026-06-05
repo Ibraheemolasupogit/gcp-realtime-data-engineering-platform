@@ -1,0 +1,7 @@
+flowchart LR
+    A["Inbound Events"] --> B["Parse"]
+    B --> C["Validate"]
+    C --> D["Deduplicate"]
+    D --> E["Handle Event Time"]
+    E --> F["Clean Output"]
+    C --> G["Dead-Letter Queue"]

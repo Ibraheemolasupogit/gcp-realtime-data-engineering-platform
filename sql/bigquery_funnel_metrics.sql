@@ -1,0 +1,2 @@
+-- Placeholder BigQuery-style funnel metrics query.
+-- Future milestones will define conversion funnel analytical outputs.

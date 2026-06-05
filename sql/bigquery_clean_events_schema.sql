@@ -1,0 +1,2 @@
+-- Placeholder BigQuery-style clean events schema.
+-- Future milestones will define validated and deduplicated event fields.

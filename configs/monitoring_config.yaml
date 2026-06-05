@@ -1,0 +1,12 @@
+# Placeholder operational monitoring configuration.
+monitoring:
+  metrics:
+    - events_received
+    - events_validated
+    - duplicate_events
+    - late_events
+    - dead_letter_events
+    - processing_errors
+  gcp_alignment:
+    logging_service: cloud_logging
+    monitoring_service: cloud_monitoring

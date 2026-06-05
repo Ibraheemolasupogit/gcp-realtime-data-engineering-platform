@@ -1,0 +1,11 @@
+# Placeholder quality rules for future validation implementation.
+quality_rules:
+  schema_validation: true
+  duplicate_detection:
+    key: event_id
+  event_time:
+    allow_late_events: true
+    max_lateness_seconds: 300
+  dead_letter:
+    enabled: true
+    route_invalid_events: true

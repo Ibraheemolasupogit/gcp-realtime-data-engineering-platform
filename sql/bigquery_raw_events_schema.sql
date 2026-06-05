@@ -1,0 +1,2 @@
+-- Placeholder BigQuery-style raw events schema.
+-- No cloud resources are provisioned in Milestone 1.

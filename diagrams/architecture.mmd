@@ -1,0 +1,6 @@
+flowchart LR
+    A["Retail Event Sources"] --> B["Local Publisher"]
+    B --> C["Pub/Sub-style Topic"]
+    C --> D["Processing Boundary"]
+    D --> E["BigQuery-style Models"]
+    E --> F["Dashboard-ready Outputs"]

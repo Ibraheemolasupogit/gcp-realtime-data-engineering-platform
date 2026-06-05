@@ -1,0 +1,2 @@
+-- Placeholder BigQuery-style product activity query.
+-- Future milestones will define product-level analytical outputs.

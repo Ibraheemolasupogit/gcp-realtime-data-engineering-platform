@@ -1,0 +1,6 @@
+flowchart TB
+    A["Pub/Sub Topic"] --> B["Dataflow / Beam Pipeline"]
+    B --> C["Valid Events"]
+    B --> D["Dead-Letter Topic"]
+    C --> E["BigQuery Raw and Clean Tables"]
+    E --> F["Analytical Views"]

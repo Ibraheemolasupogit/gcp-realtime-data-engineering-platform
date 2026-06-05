@@ -1,0 +1,12 @@
+# Placeholder BigQuery-style table configuration.
+tables:
+  raw_events:
+    description: Raw event landing table design.
+  clean_events:
+    description: Validated and deduplicated event table design.
+  hourly_metrics:
+    description: Dashboard-ready hourly aggregate table design.
+  customer_activity:
+    description: Customer-level activity table design.
+  product_activity:
+    description: Product-level activity table design.

@@ -1,0 +1,2 @@
+-- Placeholder BigQuery-style hourly metrics query.
+-- Future milestones will define dashboard-ready hourly aggregates.

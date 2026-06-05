@@ -1,0 +1,10 @@
+# Placeholder pipeline configuration for future local streaming work.
+pipeline:
+  name: retail_event_stream
+  mode: local_first
+  gcp_alignment:
+    processing_service: dataflow
+    messaging_service: pubsub
+  defaults:
+    allowed_lateness_seconds: 300
+    idempotency_key: event_id

@@ -1,0 +1,15 @@
+# Placeholder event schema. Milestone 2 will define concrete fields and examples.
+event_schema:
+  version: 0.1.0
+  domain: retail_customer_events
+  required_fields:
+    - event_id
+    - event_type
+    - event_timestamp
+    - customer_id
+  event_types:
+    - page_view
+    - product_view
+    - add_to_cart
+    - checkout_started
+    - order_completed

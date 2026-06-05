@@ -1,0 +1,2 @@
+-- Placeholder BigQuery-style customer activity query.
+-- Future milestones will define customer-level analytical outputs.

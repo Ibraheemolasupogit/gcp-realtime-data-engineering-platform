@@ -1,0 +1,43 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+.coverage
+htmlcov/
+
+# Virtual environments
+.venv/
+venv/
+env/
+
+# Local data and outputs
+data/raw/*
+data/processed/*
+data/sample/*
+reports/*
+outputs/*
+!data/raw/.gitkeep
+!data/processed/.gitkeep
+!data/sample/.gitkeep
+!reports/.gitkeep
+!reports/sample/
+!reports/sample/.gitkeep
+!outputs/.gitkeep
+!outputs/sample/
+!outputs/sample/.gitkeep
+
+# Secrets and credentials
+.env
+.env.*
+*.key
+*.pem
+*service-account*.json
+*credentials*.json
+
+# OS and editor files
+.DS_Store
+.idea/
+.vscode/
