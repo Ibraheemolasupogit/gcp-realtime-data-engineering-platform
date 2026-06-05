@@ -1,0 +1,143 @@
+{
+  "counts_by_rejection_reason": {
+    "duplicate_event_id": 4,
+    "invalid_timestamp": 1,
+    "invalid_transaction_amount": 1,
+    "late_event": 4,
+    "malformed_identifier": 2,
+    "missing_required_field": 2,
+    "unknown_event_type": 2
+  },
+  "non_replayable_events": 8,
+  "recommended_actions_by_reason": {
+    "duplicate_event_id": [
+      "Replay only if idempotency state confirms the event was not already written."
+    ],
+    "invalid_timestamp": [
+      "Correct timestamp format before replay."
+    ],
+    "invalid_transaction_amount": [
+      "Correct business-rule violations before replay."
+    ],
+    "late_event": [
+      "Replay through a controlled late-event path if business rules allow."
+    ],
+    "malformed_identifier": [
+      "Correct customer, product, or session identifiers before replay."
+    ],
+    "missing_required_field": [
+      "Repair or enrich missing critical fields before replay."
+    ],
+    "unknown_event_type": [
+      "Update schema mapping intentionally before replay."
+    ]
+  },
+  "replay_candidates": [
+    {
+      "classification_reason": "conditionally_replayable_with_idempotency_check",
+      "event_id": "68daaa6a-1db3-50e1-a7f4-43d0f2589e6c",
+      "idempotency_key": "f4b61d46c43de4550b69401d84fa144cd7b1d2c9967b0b39d39656881511334c",
+      "rejection_reason": "duplicate_event_id"
+    },
+    {
+      "classification_reason": "retryable_transient_or_late_event",
+      "event_id": "f7160cb1-f22e-52bc-971e-15e66ddf8720",
+      "idempotency_key": "e6cb427df7c9a23a89d9bd94e338bf045363f4a937a0d943f792fc1e95e7ff33",
+      "rejection_reason": "late_event"
+    },
+    {
+      "classification_reason": "conditionally_replayable_with_idempotency_check",
+      "event_id": "9ba0c416-454d-5919-8515-3e8f16f9e2ba",
+      "idempotency_key": "03063c51831bdb7bc16cc4c16a1f2b9d69e7f6ea5276a57a6afa8d2258e40533",
+      "rejection_reason": "duplicate_event_id"
+    },
+    {
+      "classification_reason": "retryable_transient_or_late_event",
+      "event_id": "3c1a3c2f-cf07-563d-8bf3-cd833806ea30",
+      "idempotency_key": "98500e4457beec6db438426d4b19c96ab23c9cb4390862d5b33682a2f104cd1f",
+      "rejection_reason": "late_event"
+    },
+    {
+      "classification_reason": "conditionally_replayable_with_idempotency_check",
+      "event_id": "240552e9-783e-5d8a-8502-1808de834994",
+      "idempotency_key": "731434732e1d0bc2cd9fc9a1785feaddae4f7c62abf89f34c106e230b4f88317",
+      "rejection_reason": "duplicate_event_id"
+    },
+    {
+      "classification_reason": "retryable_transient_or_late_event",
+      "event_id": "087fe944-139a-5ef8-928c-39354be4ab49",
+      "idempotency_key": "7ac93565add0bd5cb009f945381a08fcaeb4d39b2f1ff22c09702b19ff2b964d",
+      "rejection_reason": "late_event"
+    },
+    {
+      "classification_reason": "conditionally_replayable_with_idempotency_check",
+      "event_id": "266465b1-ec2f-506f-b22e-8d0d03782302",
+      "idempotency_key": "77b6ae0bebdc5feefe76cedc27fb9738c9a78cbda0f78efddf7d6d581936ad95",
+      "rejection_reason": "duplicate_event_id"
+    },
+    {
+      "classification_reason": "retryable_transient_or_late_event",
+      "event_id": "88981c07-a733-50bb-b152-7a1105fe8037",
+      "idempotency_key": "4291883c09fd7bdf895463bb208ac66196b1f334c47069858cd12e0939b759e2",
+      "rejection_reason": "late_event"
+    }
+  ],
+  "replayable_events": 8,
+  "retry_policy": {
+    "backoff_multiplier": 2.0,
+    "backoff_seconds": 5,
+    "max_attempts": 3,
+    "non_retryable_reasons": [
+      "invalid_timestamp",
+      "invalid_transaction_amount",
+      "malformed_event_record",
+      "malformed_identifier",
+      "missing_required_field",
+      "unknown_event_type"
+    ],
+    "retryable_reasons": [
+      "duplicate_event_id",
+      "late_event",
+      "processing_error"
+    ]
+  },
+  "reviewed_at": "2026-06-05T09:34:12.101928Z",
+  "sample_events": [
+    {
+      "classification_reason": "conditionally_replayable_with_idempotency_check",
+      "event_id": "68daaa6a-1db3-50e1-a7f4-43d0f2589e6c",
+      "recommended_action": "Replay only if idempotency state confirms the event was not already written.",
+      "rejection_reason": "duplicate_event_id",
+      "replayable": true
+    },
+    {
+      "classification_reason": "retryable_transient_or_late_event",
+      "event_id": "f7160cb1-f22e-52bc-971e-15e66ddf8720",
+      "recommended_action": "Replay through a controlled late-event path if business rules allow.",
+      "rejection_reason": "late_event",
+      "replayable": true
+    },
+    {
+      "classification_reason": "requires_data_or_schema_repair_before_replay",
+      "event_id": "4018878d-26e0-5078-a4fe-31e93ce19d74",
+      "recommended_action": "Repair or enrich missing critical fields before replay.",
+      "rejection_reason": "missing_required_field",
+      "replayable": false
+    },
+    {
+      "classification_reason": "requires_data_or_schema_repair_before_replay",
+      "event_id": "9f952bed-0d92-5fc9-af24-e1ad4a73191f",
+      "recommended_action": "Correct customer, product, or session identifiers before replay.",
+      "rejection_reason": "malformed_identifier",
+      "replayable": false
+    },
+    {
+      "classification_reason": "conditionally_replayable_with_idempotency_check",
+      "event_id": "9ba0c416-454d-5919-8515-3e8f16f9e2ba",
+      "recommended_action": "Replay only if idempotency state confirms the event was not already written.",
+      "rejection_reason": "duplicate_event_id",
+      "replayable": true
+    }
+  ],
+  "total_dead_letter_events": 16
+}

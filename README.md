@@ -221,6 +221,21 @@ This writes:
 
 Running `python scripts/generate_reports.py` also refreshes analytics outputs and then generates monitoring outputs. Monitoring is local-only and maps conceptually to Cloud Logging and Cloud Monitoring; no live GCP monitoring resources are provisioned.
 
+## Review Dead-Letter And Replay Candidates
+
+Milestone 9 adds a local dead-letter review workflow:
+
+```bash
+python scripts/run_dead_letter_review.py
+```
+
+This reads `outputs/dead_letter_events.jsonl` and writes:
+
+- `outputs/dead_letter_review_summary.json`
+- `reports/dead_letter_review_report.md`
+
+The workflow classifies replayable and non-replayable records, summarizes rejection reasons, documents retry policy metadata, and explains idempotency safeguards. It does not republish events, connect to Pub/Sub, run Dataflow, write BigQuery, or provision GCP resources.
+
 ## Portfolio Positioning
 
 This repository is positioned as a production-style data engineering project scaffold. It emphasizes modular design, reliability patterns, analytical modeling boundaries, and cloud-aligned architecture without claiming live deployment. The aim is to make the design easy to review by data engineering, cloud engineering, and technical hiring audiences.
