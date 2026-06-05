@@ -191,6 +191,21 @@ Analytics outputs are written to:
 
 These are local CSV and JSON artifacts that map conceptually to future BigQuery tables and dashboard sources. No BigQuery resources or dashboard UI are created in this milestone.
 
+## Review BigQuery-Style SQL
+
+Milestone 7 adds a local SQL design layer under `sql/` for warehouse-ready schemas and transformations:
+
+- `realtime_analytics.raw_events`
+- `realtime_analytics.clean_events`
+- `realtime_analytics.dead_letter_events`
+- `realtime_analytics.hourly_event_metrics`
+- `realtime_analytics.customer_activity_summary`
+- `realtime_analytics.product_activity_summary`
+- `realtime_analytics.transaction_value_summary`
+- `realtime_analytics.funnel_metrics`
+
+These SQL files use BigQuery Standard SQL and document partitioning and clustering recommendations where relevant. They are portfolio-quality design artifacts only; the repository does not connect to BigQuery, run queries, create datasets, or provision cloud resources.
+
 ## Portfolio Positioning
 
 This repository is positioned as a production-style data engineering project scaffold. It emphasizes modular design, reliability patterns, analytical modeling boundaries, and cloud-aligned architecture without claiming live deployment. The aim is to make the design easy to review by data engineering, cloud engineering, and technical hiring audiences.
